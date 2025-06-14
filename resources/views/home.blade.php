@@ -5,17 +5,13 @@
 
 @section('content')
     <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="hero-image"></div> 
-        <div class="container hero-content">
-            <div class="text-center position-relative">
-                <h1 class="display-4 mb-4">Votre Voyage vers le Succès Commence Ici</h1>
-                <p class="lead mb-4">Accompagnement professionnel pour votre parcours d'études à l'étranger</p>
-                <div class="d-flex justify-content-center gap-3">
-                    <!-- <a href="{{ route('services') }}" class="btn btn-light">Our Services</a> -->
-                    <a href="{{ route('contact') }}" class="btn btn-outline-danger text-white hover-text-danger">Contactez-nous</a>
-                </div>
-            </div>
+    <section class="new-hero-section">
+        <div class="new-hero-background"></div>
+        <div class="new-hero-overlay"></div>
+        <div class="new-hero-content">
+            <h1 class="new-hero-title">Votre Voyage vers le Succès Commence Ici</h1>
+            <p class="new-hero-subtitle">Accompagnement professionnel pour votre parcours d'études à l'étranger</p>
+            <a href="{{ route('contact') }}" class="new-hero-btn">Contactez-nous</a>
         </div>
     </section>
 
@@ -227,7 +223,7 @@
     <!-- Videos Section -->
     <section class="py-5">
         <div class="container">
-            <h2 class="text-center mb-5">Histoires de Réussite de Visa</h2>
+            <h2 class="text-center mb-5">Réussite de Visa</h2>
             <div class="row g-4">
                 <!-- Video 1 -->
                 <div class="col-md-4">
@@ -282,6 +278,21 @@
         padding-bottom: 0.75rem;
     }
 
+    .section-title::after,
+    .text-3xl::after,
+    .text-4xl::after,
+    h2.text-center::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background-color: #dc3545;
+        border-radius: 2px;
+    }
+
     .section-subtitle {
         font-size: 1.125rem;
         line-height: 1.75rem;
@@ -291,64 +302,154 @@
         margin: 0 auto 2rem;
     }
 
-    /* Hero Section */
-    .hero-section {
+    /* New Hero Section Styles */
+    .new-hero-section {
         position: relative;
         width: 100%;
         height: 100vh;
+        min-height: 500px; /* Ensure minimum height */
         overflow: hidden;
-        padding: 0;
+        color: white;
     }
-    
-    .hero-image {
+
+    .new-hero-background {
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background-image: url('{{ asset("images/background.png") }}');
+        background-image: url('{{ asset("images/background.png") }}'); /* Use your background image */
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
+        z-index: 1;
+        transform: scale(1.05); /* Slight zoom effect */
+        transition: transform 0.5s ease-out;
     }
-    
-    .hero-content {
-        position: relative;
+
+    .new-hero-section:hover .new-hero-background {
+        transform: scale(1);
+    }
+
+    .new-hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
         z-index: 2;
-        padding: 2rem;
-        color: red;
-        margin-top: 82vh;
-        transform: translateY(-50%);
     }
-    
-    .hero-content h1 {
-        font-size: 3.5rem;
+
+    .new-hero-content {
+        position: absolute;
+        top: 53%;
+        left: 5%;
+        z-index: 3;
+        max-width: 900px;
+        padding: 20px;
+        text-align: left;
+        transform: none;
+    }
+
+    .new-hero-title {
+        font-size: 3.2rem;
         font-weight: 700;
-        margin-bottom: 1.5rem;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+        color: red;
     }
-    
-    .hero-content .lead {
-        font-size: 1.5rem;
-        font-weight: 400;
-        margin-bottom: 2rem;
-        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-    }
-    
-    .hero-content .btn {
-        padding: 0.8rem 2rem;
+
+    .new-hero-subtitle {
         font-size: 1.1rem;
+        font-weight: 400;
+        margin-bottom: 20px;
+        text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+        color: white;
+    }
+
+    .new-hero-btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #dc3545;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 1rem;
         font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        transition: all 0.3s ease;
+        letter-spacing: 0.5px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        border: 2px solid #dc3545;
     }
-    
-    .hero-content .btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+    .new-hero-btn:hover {
+        background-color: #bb2d3b;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
     }
-    
+
+    /* Responsive Adjustments for New Hero Section */
+    @media (max-width: 1024px) {
+        .new-hero-title {
+            font-size: 2rem;
+        }
+        .new-hero-subtitle {
+            font-size: 1rem;
+        }
+        .new-hero-content {
+            top: 65%;
+            left: 5%;
+        }
+        .new-hero-btn {
+            padding: 8px 18px;
+            font-size: 0.9rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .new-hero-section {
+            height: 70vh;
+            min-height: 400px;
+        }
+        .new-hero-title {
+            font-size: 1.8rem;
+        }
+        .new-hero-subtitle {
+            font-size: 0.9rem;
+        }
+        .new-hero-btn {
+            padding: 7px 15px;
+            font-size: 0.8rem;
+        }
+        .new-hero-content {
+            top: 60%;
+            left: 5%;
+            max-width: 90%;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .new-hero-section {
+            height: 60vh;
+            min-height: 350px;
+        }
+        .new-hero-title {
+            font-size: 1.5rem;
+        }
+        .new-hero-subtitle {
+            font-size: 0.8rem;
+        }
+        .new-hero-btn {
+            padding: 6px 12px;
+            font-size: 0.75rem;
+        }
+        .new-hero-content {
+            top: 55%;
+            left: 5%;
+        }
+    }
+
+    /* Video wrapper styles */
     .video-wrapper {
         position: relative;
         width: 100%;
@@ -384,6 +485,7 @@
         padding: 0 10px;
     }
     
+    /* Destination Image Styles */
     .destination-img {
         height: 300px;
         object-fit: cover;
@@ -546,18 +648,6 @@
         padding-bottom: 0.75rem;
     }
 
-    .text-3xl::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 80px;
-        height: 4px;
-        background-color: #dc3545;
-        border-radius: 2px;
-    }
-
     .text-lg {
         font-size: 1.125rem;
         line-height: 1.75rem;
@@ -662,10 +752,6 @@
         display: inline-flex;
     }
 
-    .items-center {
-        align-items: center;
-    }
-
     .px-6 {
         padding-left: 1.5rem;
         padding-right: 1.5rem;
@@ -740,18 +826,6 @@
         padding-bottom: 0.75rem;
     }
 
-    .text-4xl::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 80px;
-        height: 4px;
-        background-color: #dc3545;
-        border-radius: 2px;
-    }
-
     /* Videos Section */
     .py-5 {
         padding: 60px 0;
@@ -770,10 +844,10 @@
     h2.text-center::after {
         content: '';
         position: absolute;
-        bottom: 0;
+        bottom: 10px;
         left: 50%;
         transform: translateX(-50%);
-        width: 80px;
+        width: 450px;
         height: 4px;
         background-color: #dc3545;
         border-radius: 2px;
